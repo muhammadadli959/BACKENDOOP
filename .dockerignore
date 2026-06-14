@@ -1,0 +1,9 @@
+target/
+.env
+uploads/
+.idea/
+.vscode/
+*.log
+*.tmp
+node_modules/
+/.m2/

@@ -1,0 +1,55 @@
+spring:
+  config:
+    import:
+      - optional:dotenv:./.env
+      - optional:dotenv:../.env
+      - optional:dotenv:${user.dir}/.env
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/PBO1_db}
+    driver-class-name: org.postgresql.Driver
+    username: ${DB_USER:postgresuser}
+    password: ${DB_PASSWORD:pbo123}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          time_zone: UTC
+    show-sql: false
+    open-in-view: false
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+server:
+  port: ${PORT:8080}
+
+file:
+  upload-dir: uploads/images
+
+cloudinary:
+  cloud-name: ${CLOUDINARY_CLOUD_NAME}
+  api-key: ${CLOUDINARY_API_KEY}
+  api-secret: ${CLOUDINARY_API_SECRET}
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:change-me-secret-key-at-least-32-chars-000000000000}
+    expiration-ms: ${JWT_EXPIRATION_MS:604800000}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+logging:
+  level:
+    root: INFO
+    org.hibernate.SQL: WARN
+    org.hibernate.type.descriptor.sql.BasicBinder: WARN
+    org.springframework: INFO
+    com.example.backend: INFO
